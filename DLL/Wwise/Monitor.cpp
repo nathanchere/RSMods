@@ -12,7 +12,7 @@ namespace Wwise::Monitor {
 	/// <param name="in_eErrorLevel"> - Specifies whether it should be displayed as a message or an error</param>
 	/// <returns>AK_Success if successful, AK_Fail if there was a problem posting the message. In optimized mode, this function returns AK_NotCompatible.</returns>
 	AKRESULT PostCode(AkErrorCode in_eError, AkErrorLevel in_eErrorLevel) {
-		tMonitor_PostCode func = (tMonitor_PostCode)Wwise::Exports::func_Wwise_Monitor_PostCode.Get();
+		tMonitor_PostCode func = (tMonitor_PostCode)Wwise::Exports::func_Wwise_Monitor_PostCode;
 		return func(in_eError, in_eErrorLevel);
 	}
 }

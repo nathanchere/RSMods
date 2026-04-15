@@ -7,8 +7,8 @@ LPVOID* DirectInputPointer = NULL;
 /// Disable XInput controlers (Xbox Controllers)
 /// </summary>
 void XInput() {
-	MemUtil::SetStaticValue(Offsets::xinputModule.Get(), 0, sizeof(int));
-	MemUtil::SetStaticValue(Offsets::xinputEnable.Get(), 0, sizeof(int));
+	MemUtil::SetStaticValue(Offsets::xinputModule, 0, sizeof(int));
+	MemUtil::SetStaticValue(Offsets::xinputEnable, 0, sizeof(int));
 }
 
 /// <summary>
@@ -19,15 +19,7 @@ void _declspec(naked) hook_DirectInput() {
 		mov DirectInputPointer, esi
 		push 0x800
 
-		pushad
-
-		lea ecx, Offsets::hookBackAddr_DirectInput8
-		call VersioningStruct<uintptr_t>::GetValue
-		mov Offsets::runtimeVersionStructValue, eax
-
-		popad
-
-		jmp[Offsets::runtimeVersionStructValue]
+		jmp [Offsets::hookBackAddr_DirectInput8]
 	}
 }
 

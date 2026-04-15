@@ -255,9 +255,6 @@
     <ClCompile Include="CC\Effects\WavyNotesEffect.cpp">
       <Filter>CrowdControl\Effects</Filter>
     </ClCompile>
-    <ClCompile Include="VersioningStruct.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Wwise\Exports.cpp">
       <Filter>Wwise</Filter>
     </ClCompile>
@@ -550,9 +547,6 @@
     </ClInclude>
     <ClInclude Include="CC\Effects\WavyNotesEffect.hpp">
       <Filter>CrowdControl\Effects\EffectHeaders</Filter>
-    </ClInclude>
-    <ClInclude Include="VersioningStruct.h">
-      <Filter>Main Headers</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>Main Headers</Filter>

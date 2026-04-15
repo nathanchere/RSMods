@@ -11,13 +11,8 @@ std::vector<std::string> songTitles(20);
 void __declspec(naked) hook_fakeTitles() {
 	__asm {
 		push eax
-		push ecx
 
-		lea ecx, Offsets::func_ecxAddress
-		call VersioningStruct<uintptr_t>::GetValue
-
-		pop ecx
-
+		mov eax, Offsets::func_ecxAddress
 		mov ecx, dword ptr ds : [eax] // Store the contents of the return value into the ECX register to replicate the original instruction.
 		
 		pop eax
@@ -44,14 +39,7 @@ void __declspec(naked) hook_fakeTitles() {
 	ExitHookFakeTitle:
 		popad									// Return EAX, ECX, and EDX from the stack.
 
-		pushad
-
-		lea ecx, Offsets::hookBackAddr_FakeTitles
-		call VersioningStruct<uintptr_t>::GetValue
-		mov Offsets::runtimeVersionStructValue, eax
-
-		popad
-		jmp[Offsets::runtimeVersionStructValue]	// Return to the original code.
+		jmp [Offsets::hookBackAddr_FakeTitles]	// Return to the original code.
 	}
 }
 
@@ -95,15 +83,7 @@ void __declspec(naked) missingLocalizationHookFunc() {
 		add esp, 0x8									// Replace original instruction we were replacing
 		push eax										// Replace original instruction we were replacing
 
-		pushad
-
-		lea ecx, Offsets::hookBackAddr_missingLocalization
-		call VersioningStruct<uintptr_t>::GetValue
-		mov Offsets::runtimeVersionStructValue, eax
-
-		popad
-
-		jmp[Offsets::runtimeVersionStructValue]	// Jump back to the original instructions.
+		jmp [Offsets::hookBackAddr_missingLocalization]	// Jump back to the original instructions.
 	}
 }
 
@@ -123,7 +103,7 @@ void CustomSongTitles::SetFakeListNames() {
 
 	len = 6;
 
-	Offsets::hookBackAddr_FakeTitles.Get() = Offsets::hookAddr_ModifyLocalized + len;
+	Offsets::hookBackAddr_FakeTitles = Offsets::hookAddr_ModifyLocalized + len;
 	MemUtil::PlaceHook(Offsets::hookAddr_ModifyLocalized, hook_fakeTitles, len);
 }
 
@@ -134,7 +114,7 @@ void CustomSongTitles::HookSongListsKoko() {
 	SetFakeListNames();
 
 	len = 5;
-	Offsets::hookBackAddr_missingLocalization.Get() = Offsets::hookAddr_MissingLocalization + len;
+	Offsets::hookBackAddr_missingLocalization = Offsets::hookAddr_MissingLocalization + len;
 
 	//Skip less printf parameters if those have been removed
 	MemUtil::PatchAdr(Offsets::patch_sprintfArg, (BYTE*)Offsets::patch_SprintfArgs, 1);

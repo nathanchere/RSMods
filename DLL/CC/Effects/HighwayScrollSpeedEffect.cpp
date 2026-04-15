@@ -61,6 +61,6 @@ namespace CrowdControl::Effects {
 	void HighwayScrollSpeedEffect::WriteScrollSpeedMultiplier(double val) {
 		LOG_INFO("HighwayScrollSpeedEffect::WriteScrollSpeedMultiplier(" << val << ")" << std::endl);
 
-		MemUtil::SetStaticValue(Offsets::ptr_scrollSpeedMultiplier.Get(), val, sizeof(double));
+		MemUtil::SetStaticValue(Offsets::ptr_scrollSpeedMultiplier, val, sizeof(double));
 	}
 }

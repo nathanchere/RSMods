@@ -72,7 +72,6 @@
 #include "Resolution.h"
 #include "RSColor.h"
 #include "Tuning.h"
-#include "VersioningStruct.h"
 #include "SongTuning.hpp"
 #include "GameState.hpp"
 #include "SongTimer.hpp"

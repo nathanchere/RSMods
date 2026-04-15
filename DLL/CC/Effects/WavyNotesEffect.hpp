@@ -56,15 +56,7 @@ namespace CrowdControl::Effects {
 			fld dword ptr[esp + 0x2C]
 			fstp dword ptr[ebx + 0x78]
 
-			pushad
-
-			lea ecx, Offsets::ptr_wavyNotesJmpBck
-			call VersioningStruct<uintptr_t>::GetValue
-			mov Offsets::runtimeVersionStructValue, eax
-
-			popad
-
-			jmp [Offsets::runtimeVersionStructValue]
+			jmp [Offsets::ptr_wavyNotesJmpBck]
 		}
 	}
 

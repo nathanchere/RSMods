@@ -179,7 +179,6 @@
     <ClCompile Include="SongTuning.cpp" />
     <ClCompile Include="Tests.cpp" />
     <ClCompile Include="Twitch.cpp" />
-    <ClCompile Include="VersioningStruct.cpp" />
     <ClCompile Include="Wwise\Exports.cpp">
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">../stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug with Wwise Logging|Win32'">../stdafx.h</PrecompiledHeaderFile>
@@ -304,7 +303,6 @@
     <ClInclude Include="Tests.hpp" />
     <ClInclude Include="Tuning.h" />
     <ClInclude Include="Twitch.hpp" />
-    <ClInclude Include="VersioningStruct.h" />
     <ClInclude Include="VoiceOver.h" />
     <ClInclude Include="Wwise\Logging.hpp" />
     <ClInclude Include="Wwise\MemoryMgr.hpp" />

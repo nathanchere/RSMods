@@ -257,15 +257,7 @@ void __declspec(naked) hook_changeSampleRate() {
 	__asm {
 		mov EAX, AudioDevices::output_SampleRate					// Move user-provided sample rate into EAX
 
-		pushad
-
-		lea ecx, Offsets::ptr_sampleRateRequirementAudioOutput_JmpBck
-		call VersioningStruct<uintptr_t>::GetValue
-		mov Offsets::runtimeVersionStructValue, eax
-
-		popad
-
-		jmp Offsets::runtimeVersionStructValue
+		jmp [Offsets::ptr_sampleRateRequirementAudioOutput_JmpBck]
 	}
 }
 
@@ -279,15 +271,7 @@ void __declspec(naked) hook_sampleRate_FixDivZeroCrash() {
 		mov EBX, 0x1									// Move 1 into the EBX register. This prevents the divide by 0 crash when using a sample rate above 48kHz.
 		shr esi, 0x10									// Replace the original code we overwrote.
 
-		pushad
-
-		lea ecx, Offsets::ptr_sampleRateDivZeroCrash_JmpBck
-		call VersioningStruct<uintptr_t>::GetValue
-		mov Offsets::runtimeVersionStructValue, eax
-
-		popad
-
-		jmp Offsets::runtimeVersionStructValue
+		jmp [Offsets::ptr_sampleRateDivZeroCrash_JmpBck]
 	}
 }
 

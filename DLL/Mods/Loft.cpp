@@ -34,7 +34,7 @@ namespace Loft {
 			}
 		}
 		else {
-			MemUtil::SetStaticValue(Offsets::ptr_drunkShit.Get(), 0.3333333333f, sizeof(float));
+			MemUtil::SetStaticValue(Offsets::ptr_drunkShit, 0.3333333333f, sizeof(float));
 
 			// User originally had the loft off, but then we turned on this mod, so turn the loft back off.
 			if (D3DHooks::ToggleOffLoftWhenDoneWithMod) {

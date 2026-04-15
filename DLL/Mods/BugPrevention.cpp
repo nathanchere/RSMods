@@ -62,15 +62,7 @@ namespace BugPrevention {
 			push EDI						// The code we are overwriting to place this hook
 			MOV EDI, DWORD PTR DS : [ESI + 0xC] // The code we are overwriting to place this hook
 
-			pushad
-
-			lea ecx, Offsets::ptr_AdvancedDisplayCrashJmpBck
-			call VersioningStruct<uintptr_t>::GetValue
-			mov Offsets::runtimeVersionStructValue, eax
-
-			popad
-
-			jmp Offsets::runtimeVersionStructValue
+			jmp [Offsets::ptr_AdvancedDisplayCrashJmpBck]
 
 			prevAdvancedDisplayCrash :
 			ret							// ECX is NULL, so we need to leave this function or we will crash.
@@ -84,7 +76,7 @@ namespace BugPrevention {
 	void PreventAdvancedDisplayCrash() {
 		MemUtil::PlaceHook(Offsets::ptr_AdvancedDisplayCrash, advancedDisplayCrashHook, 7);
 
-		FlushInstructionCache(GetCurrentProcess(), (void*)Offsets::ptr_AdvancedDisplayCrash.Get(), 7);
+		FlushInstructionCache(GetCurrentProcess(), (void*)Offsets::ptr_AdvancedDisplayCrash, 7);
 
 		LOG_INFO("(BUG PREVENTION) Prevented Advanced Display Crash" << std::endl);
 	}
@@ -117,7 +109,7 @@ namespace BugPrevention {
 	/// Fixes crash when modifying functions in Rocksmith. 
 	/// </summary>
 	void FixModifyingFunctions() {
-		uintptr_t forceSuccessLSBOffset = Offsets::ptr_ModdedPtrCrashFix.Get() + 0x3; // LSB of the MOV is what we are replacing
+		uintptr_t forceSuccessLSBOffset = Offsets::ptr_ModdedPtrCrashFix + 0x3; // LSB of the MOV is what we are replacing
 		byte forceFailedLSB = MemUtil::ReadValue<byte>(forceSuccessLSBOffset + 0x14, true); // We are replacing it with ForceFailed LSB, which is 0x14 away
 		MemUtil::PatchAdr(forceSuccessLSBOffset, (LPVOID)&forceFailedLSB, 1, true);
 	}

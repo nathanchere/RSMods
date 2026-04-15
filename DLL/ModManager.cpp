@@ -503,10 +503,10 @@ namespace ModManager {
 
 		if (rsAsioBypassTwoRTC) return;
 
-		if (Settings::ReturnSettingValue("BypassTwoRTCMessageBox") == "off" && *(char*)Offsets::ptr_twoRTCBypass.Get() == Offsets::ptr_twoRTCBypass_patch_call[0]) {
-			MemUtil::PatchAdr((LPVOID)Offsets::ptr_twoRTCBypass.Get(), (LPVOID)Offsets::ptr_twoRTCBypass_original, 6);
+		if (Settings::ReturnSettingValue("BypassTwoRTCMessageBox") == "off" && *(char*)Offsets::ptr_twoRTCBypass == Offsets::ptr_twoRTCBypass_patch_call[0]) {
+			MemUtil::PatchAdr((LPVOID)Offsets::ptr_twoRTCBypass, (LPVOID)Offsets::ptr_twoRTCBypass_original, 6);
 		}
-		else if (Settings::ReturnSettingValue("BypassTwoRTCMessageBox") == "on" && *(char*)Offsets::ptr_twoRTCBypass.Get() == Offsets::ptr_twoRTCBypass_original[0]) {
+		else if (Settings::ReturnSettingValue("BypassTwoRTCMessageBox") == "on" && *(char*)Offsets::ptr_twoRTCBypass == Offsets::ptr_twoRTCBypass_original[0]) {
 			QualityOfLife::PatchTwoRTC();
 		}
 	}
@@ -547,10 +547,10 @@ namespace ModManager {
 	void ConfigureAlternativeSampleRate() {
 		if (Settings::ReturnSettingValue("AltOutputSampleRate") == "on" &&
 			Settings::GetModSetting("AlternativeOutputSampleRate") != 48000 &&
-			*(int*)Offsets::ptr_sampleRateBuffer.Get() != 5 &&
-			*(int*)Offsets::ptr_sampleRateBuffer.Get() != 2) {
-			*(int*)Offsets::ptr_sampleRateSize.Get() = 2;
-			*(int*)Offsets::ptr_sampleRateBuffer.Get() = 128;
+			*(int*)Offsets::ptr_sampleRateBuffer != 5 &&
+			*(int*)Offsets::ptr_sampleRateBuffer != 2) {
+			*(int*)Offsets::ptr_sampleRateSize = 2;
+			*(int*)Offsets::ptr_sampleRateBuffer = 128;
 		}
 	}
 

@@ -67,7 +67,7 @@ void SongTimer::SetGreyNoteTimer(float timeInSeconds) {
 /// <returns>The amount of time it takes to go from song 1 to song 2.</returns>
 double SongTimer::GetNonStopPlayTimer()
 {
-	return *(double*)Offsets::ptr_NonStopPlayPreSongTimer.Get();
+	return *(double*)Offsets::ptr_NonStopPlayPreSongTimer;
 }
 
 /// <summary>

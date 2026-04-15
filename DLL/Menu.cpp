@@ -24,7 +24,7 @@ namespace Menu {
 	/// </summary>
 	/// <returns>True if the call is from an overlay, false otherwise.</returns>
 	bool IsOverlayCall() {
-		return (uint32_t)_ReturnAddress() > Offsets::baseEnd.Get();
+		return (uint32_t)_ReturnAddress() > Offsets::baseEnd;
 	}
 
 	/// <summary>

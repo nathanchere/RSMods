@@ -10,7 +10,7 @@ namespace Wwise {
 	/// </summary>
 	/// <returns>Restore Sink Requested</returns>
 	bool IsRestoreSinkRequested() {
-		tIsRestoreSinkRequested func = (tIsRestoreSinkRequested)Wwise::Exports::func_Wwise_Root_IsRestoreSinkRequested.Get();
+		tIsRestoreSinkRequested func = (tIsRestoreSinkRequested)Wwise::Exports::func_Wwise_Root_IsRestoreSinkRequested;
 		return func();
 	}
 
@@ -19,7 +19,7 @@ namespace Wwise {
 	/// </summary>
 	/// <returns>Using a dummy sink</returns>
 	bool IsUsingDummySink() {
-		tIsUsingDummySink func = (tIsUsingDummySink)Wwise::Exports::func_Wwise_Root_IsUsingDummySink.Get();
+		tIsUsingDummySink func = (tIsUsingDummySink)Wwise::Exports::func_Wwise_Root_IsUsingDummySink;
 		return func();
 	}
 }

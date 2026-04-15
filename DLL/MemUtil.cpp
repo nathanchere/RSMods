@@ -43,8 +43,8 @@ bool MemUtil::PatchAdr(uintptr_t address, LPVOID changeToMake, size_t len, bool 
 	return PatchAdr((LPVOID)(addr), changeToMake, len);
 }
 
-bool MemUtil::PatchAdr(VersioningStruct<uintptr_t>& address, LPVOID changeToMake, size_t len, bool addBaseHandle) {
-	uintptr_t addr = address.Get() + (addBaseHandle ? Offsets::baseHandle : 0);
+bool MemUtil::PatchAdr(uintptr_t& address, LPVOID changeToMake, size_t len, bool addBaseHandle) {
+	uintptr_t addr = address + (addBaseHandle ? Offsets::baseHandle : 0);
 	return PatchAdr((LPVOID)(addr), changeToMake, len);
 }
 
@@ -84,8 +84,8 @@ bool MemUtil::PatchAdr(LPVOID address, LPVOID changeToMake, size_t len) {
 	return true;
 }
 
-bool MemUtil::PlaceHook(VersioningStruct<uintptr_t>& hookSpot, void* ourFunct, int len, bool addBaseHandle) {
-	uintptr_t addr = hookSpot.Get() + (addBaseHandle ? Offsets::baseHandle : 0);
+bool MemUtil::PlaceHook(uintptr_t& hookSpot, void* ourFunct, int len, bool addBaseHandle) {
+	uintptr_t addr = hookSpot + (addBaseHandle ? Offsets::baseHandle : 0);
 	return PlaceHook((void*)(addr), ourFunct, len);
 }
 
