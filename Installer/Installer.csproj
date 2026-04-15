@@ -87,7 +87,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExeUtil.cs" />
     <Compile Include="FolderPicker.cs" />
     <Compile Include="GenUtil.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
